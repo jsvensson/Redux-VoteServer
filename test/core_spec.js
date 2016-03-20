@@ -84,9 +84,24 @@ describe('application logic', () => {
         }),
         entries: List.of('Superman', 'Trainspotting', '28 Days Later')
       }))
+    })
 
+    it('marks winner when just one entry remains', () => {
+      const state = Map({
+        vote: Map({
+          pair: List.of('Alien', 'Predator'),
+          tally: Map({
+            'Alien': 4,
+            'Predator': 2
+          })
+        }),
+        entries: List()
+      })
+      const nextState = next(state)
 
-    // end
+      expect(nextState).to.equal(Map({
+        winner: 'Alien'
+      }))
     })
 
   })
